@@ -85,7 +85,7 @@ class Rainhas:
         ini = time.time()
         problema = Problemas()
         problema._init_(self.matriz, self.acao, self.teste_objetivo, 1)
-        Buscas.busca_em_largura(self,problema)
+        Buscas.busca_em_profundidade(self,problema)
         fim = time.time()
         print("Time:", fim - ini)
         return 0
