@@ -61,11 +61,11 @@ class Buscas:
             Buscas.matrizprint(self,borda[0].estado)
             if(problema.teste_objetivo(borda[0]) == True ):
                 return 0
-            aux = Buscas.expande(self,borda[0], problema)
-            random.shuffle(aux)
+            filhos = Buscas.expande(self,borda[0], problema)
+            random.shuffle(filhos)
             borda.pop(0)
-            for acoes in range(len(aux)):
-                 borda.insert(0,aux[acoes])
+            for acoes in range(len(filhos)):
+                 borda.insert(0,filhos[acoes])
            
         print("Nao atingiu o objetivo neste limite")
         return False
@@ -84,10 +84,10 @@ class Buscas:
         while(True):
             Buscas.matrizprint(self,borda[0].estado)
             if(problema.teste_objetivo(borda[0]) == True ):#Atingir o objetivo
+                print(borda[0].custo_do_caminho)
                 break
             filhos = Buscas.expande(self,borda[0], problema) #Expandir
-            for i in range(len(filhos)):
-
+            random.shuffle(filhos)
             borda.pop(0)
             for acoes in range(len(filhos)):
                  borda.append(filhos[acoes])#Inserir no final
