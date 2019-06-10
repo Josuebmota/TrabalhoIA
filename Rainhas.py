@@ -56,7 +56,7 @@ class Rainhas:
                 if(c!=-1):
                     if(matriz[linha][coluna] == matriz[l][c]):
                         cont+=1
-                    c= c -1
+                    c-=1
 
             #Secundaria
             #For voltando
@@ -85,7 +85,7 @@ class Rainhas:
         ini = time.time()
         problema = Problemas()
         problema._init_(self.matriz, self.acao, self.teste_objetivo, 1)
-        Buscas.busca_em_profundidade(self,problema)
+        Buscas.busca_em_profundidade_com_lista_de_visitados(self,problema)
         fim = time.time()
         print("Time:", fim - ini)
         return 0
