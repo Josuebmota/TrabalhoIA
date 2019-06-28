@@ -7,9 +7,10 @@ class Rainhas:
 
     
     matriz = []
-    for l in range(8):
+    indice = 8
+    for l in range(indice):
         linha = []
-        for c in range(8):
+        for c in range(indice):
             linha.append("'x'")
         matriz.append(linha)
 
@@ -17,12 +18,11 @@ class Rainhas:
     def teste_objetivo(self, no):
         matriz = no.estado
         cont = 0
-        for l in range(8):
-            for c in range(8):
+        for l in range(len(matriz)):
+            for c in range(len(matriz)):
                 if (matriz[l][c]=="'Q'"):
                     cont+=1
-        if(cont == 8):
-            print("Deu bom")
+        if(cont == len(matriz)):
             return True
         return False
     
@@ -30,14 +30,14 @@ class Rainhas:
         matriz = no.estado
         coluna = no.profundidade
         vetor = []
-        for linha in range(8):
+        for linha in range(len(matriz)):
             matriz[linha][coluna] = "'Q'"
             #Linha e coluna
             cont = 0
-            for l in range(8):
+            for l in range(len(matriz)):
                 if(matriz[l][coluna] == matriz[linha][coluna]):
                     cont+=1
-                for c in range(8):
+                for c in range(len(matriz)):
                     if(linha == l):
                         if(matriz[linha][c] == matriz[linha][coluna]):
                             cont+=1
@@ -45,8 +45,8 @@ class Rainhas:
             #Principal
             #For seguindo
             c=coluna
-            for l in range(linha, 8, 1):
-                if(c!=8):
+            for l in range(linha,len(matriz), 1):
+                if(c!=len(matriz)):
                     if(matriz[linha][coluna] == matriz[l][c]):
                         cont+=1
                     c+=1
@@ -57,11 +57,10 @@ class Rainhas:
                     if(matriz[linha][coluna] == matriz[l][c]):
                         cont+=1
                     c-=1
-
             #Secundaria
             #For voltando
             c= coluna
-            for l in range(linha, 8, 1):
+            for l in range(linha, len(matriz), 1):
                 if(c!=-1):
                     if(matriz[linha][coluna] == matriz[l][c]):
                         cont+=1
@@ -69,7 +68,7 @@ class Rainhas:
             #For seguindo
             c = coluna
             for l in range(linha, -1, -1):
-                if(c!=8):
+                if(c!=len(matriz)):
                     if(matriz[linha][coluna] == matriz[l][c]):
                         cont+=1
                     c+=1
@@ -85,7 +84,7 @@ class Rainhas:
         ini = time.time()
         problema = Problemas()
         problema._init_(self.matriz, self.acao, self.teste_objetivo, 1)
-        Buscas.busca_em_profundidade_com_lista_de_visitados(self,problema)
+        Buscas.busca_em_profundidade_limitada(self,problema,8)
         fim = time.time()
         print("Time:", fim - ini)
         return 0
