@@ -1,17 +1,17 @@
-from No import No
-from CaracterProblem import Problemas
-from Buscas import Buscas
+from ProblemFeatures import No
 import copy
-import time
 
 class Puzzle8:
     
-    def estado_inicial(self):
-        problema = Problemas()
-        problema._init_([[0, 1, 2], [3, 4, 5], [6, 7, 8]], self.acao, self.teste_inicial,1)
-        resultado = Buscas.busca_em_profundidade_limitada(self,problema, 20) 
-        print(resultado[0].estado)
-        return resultado[0].estado
+    estado_inicial = [[2, 3, 1], [5, 8, 7], [6, 4, 0]]
+
+    # Gerar Aleatorio
+    # def estado_inicial(self):
+    #     problema = Problemas()
+    #     problema._init_([[0, 1, 2], [3, 4, 5], [6, 7, 8]], self.acao, self.teste_inicial,1)
+    #     resultado = Buscas.busca_em_profundidade_limitada(self,problema, 20) 
+    #     print(resultado[0].estado)
+    #     return resultado[0].estado
 
     def teste_inicial(self, no):
         if(no.estado ==  [[0, 0, 0], [0, 0, 0], [0, 0, 0]]):
@@ -59,15 +59,3 @@ class Puzzle8:
             aux[l+1][c] = puzzle[l][c]
             vetor.append(aux)
         return vetor 
-
-    def main(self):
-        ini = time.time()
-        problema = Problemas()
-        problema._init_(self.estado_inicial(), self.acao, self.teste_objetivo, 1)
-        Buscas.busca_em_largura(self,problema)
-        fim = time.time()
-        print("Time:", fim - ini)
-        return 0
-
-a = Puzzle8()
-a.main()

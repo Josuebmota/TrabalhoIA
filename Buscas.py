@@ -1,5 +1,4 @@
-from No import No
-from CaracterProblem import Problemas
+from ProblemFeatures import No
 import random
 from operator import attrgetter
 
@@ -69,29 +68,30 @@ class Buscas:
         Nos._init_(problema.estado_inicial,None, 0, 0)
         borda.insert(0,Nos)
         while(True):
-            Buscas.matrizprint(self,borda[0].estado)
             if(borda==[]):
+                print("Não foi atingido neste limite")
+                return 0, False
+            Buscas.matrizprint(self,borda[0].estado)
+            if(problema.teste_objetivo(borda[0]) == True ):
                 print("Profundidade Total:", borda[0].profundidade)
-                return Buscas.caminhos(self,borda[0])
-            if(problema.teste_objetivo==borda[0]):
-                print("Profundidade Total:", borda[0].profundidade)
-                return Buscas.caminhos(self,borda[0])
-            if(borda[0].profundidade!=limite+1):
+                return Buscas.caminhos(self,borda[0]), True
+            if(borda[0].profundidade<limite):
                 filhos = Buscas.expande(self,borda[0], problema)
                 random.shuffle(filhos)
+                borda.pop(0)
                 for acoes in range(len(filhos)):
                     borda.insert(0,filhos[acoes])
-            borda.pop(0)
+            else:
+                borda.pop(0)
     
-    def busca_em_aprofundamento_interativo(self, problema, interacao):
+    def busca_em_aprofundamento_interativo(self, problema):
         interacao = 0
         while(True):
-            resultado = Buscas.busca_em_profundidade_limitada(self,problema, interacao)
+            caminho, resultado = Buscas.busca_em_profundidade_limitada(self,problema, interacao)
             interacao+=1
             if(resultado == True):
-                break
+                return caminho
             print("-----------------------------------------------")
-        return 0
     
     def busca_em_profundidade_com_lista_de_visitados(self,problema):
         borda = [] #Lista de Nos

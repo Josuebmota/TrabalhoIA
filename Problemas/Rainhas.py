@@ -1,18 +1,16 @@
-from No import No
-from CaracterProblem import Problemas
-from Buscas import Buscas
+from ProblemFeatures import No
 import copy
-import time
+
 class Rainhas:
 
     
-    matriz = []
+    estado_inicial = []
     indice = 8
     for l in range(indice):
         linha = []
         for c in range(indice):
             linha.append("'x'")
-        matriz.append(linha)
+        estado_inicial.append(linha)
 
 
     def teste_objetivo(self, no):
@@ -79,18 +77,3 @@ class Rainhas:
 
             matriz[linha][coluna] = "'x'"
         return vetor
-
-    def main(self):
-        ini = time.time()
-        problema = Problemas()
-        problema._init_(self.matriz, self.acao, self.teste_objetivo, 1)
-        Buscas.busca_em_profundidade_limitada(self,problema,8)
-        fim = time.time()
-        print("Time:", fim - ini)
-        return 0
-
-
-a = Rainhas()
-a.main()
-    
-    
