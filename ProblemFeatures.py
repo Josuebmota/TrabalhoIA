@@ -12,22 +12,27 @@ class No: #Caracteristicas da Posicao
         self.custo_do_caminho = custo_do_caminho
         self.profundidade = profundidade
     
-    def getPai(self):
-        return self.pai
-    def setPai(self, pai):
-        self.pai = pai
+class Auxiliar:
+    def expande(self, no, problema, tipo): #Expandira o nó
+        Conjfilhos = [] #Conjunto de Filhos
+        possibilidades = problema.acoes(no, tipo) #Possibilidades de filhos
+        if(possibilidades !=[]):
+            for acoes in range(len(possibilidades)): #Caminhos possiveis 
+                nofilho = No()
+                nofilho._init_(possibilidades[acoes],no,no.custo_do_caminho + problema.custo_do_passo, no.profundidade + 1)
+                Conjfilhos.append(nofilho) #Adicionando o filhos
+        return Conjfilhos
 
-    def getEstado(self):
-        return self.estado
-    def setEstado(self, estado):
-        self.estado = estado
+    def matrizprint(self,matriz): #Printar a matriz
+        for i in range(len(matriz)):
+            for j in range(len(matriz)): 
+                print(matriz[i][j], end="")
+            print()
+        print("\n")
 
-    def getCusto(self):
-        return self.custo_do_caminho
-    def setCusto(self, custo_do_caminho):
-        self.custo_do_caminho = custo_do_caminho
-        
-    def getProfundidade(self):
-        return self.profundidade
-    def setProfundidade(self, profundidade):
-        self.profundidade=profundidade 
+    def caminhos(self, no): #Mostrar o caminho, caso necessario
+        caminho = []
+        while(no!=None):
+            caminho.append(no)
+            no = no.pai
+        return caminho

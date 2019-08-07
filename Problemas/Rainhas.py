@@ -17,7 +17,7 @@ class Rainhas:
 
 
     def teste_objetivo(self, no, tipo):
-        if(tipo == "normal"): #Teste para buscas cegas
+        if(tipo == "cega"): #Teste para buscas cegas
             matriz = no.estado
             cont = 0
             for l in range(len(matriz)):
@@ -38,7 +38,7 @@ class Rainhas:
 
     def acao(self, no, Busca):
         vetor = []#Vetor de filhos
-        if(Busca == "normal"): # Se for busca cega
+        if(Busca == "cega"): # Se for busca cega
             matriz = no.estado
             coluna = no.profundidade
             for linha in range(len(matriz)):
