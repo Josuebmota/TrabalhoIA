@@ -15,7 +15,7 @@
 2 - Simulated_Annealing(Ainda não foi finalizado)<br>
 3 - Algoritmos_Genéticos(Ainda não foi finalizado)<br>
 <br>
-obs:Busca Implementadas somente para o problema das Oito Rainhas
+obs:Busca Implementada somente para o problema das Oito Rainhas
 </p>
 <h2 id="problemas">Problemas</h2>
 <p>1 - Problemas das oito rainhas<br>

@@ -17,7 +17,7 @@ class Main:
         #Caso for busca com profundidade limitada, é preciso especificar o limite no parametro
         #Buscas locais so podem ser usadas nas Rainhas
         # caminho = Cega.busca_em_profundidade(self, problema)
-        caminho = Local.Hill_Climbing(self, problema)
+        caminho = Cega.busca_em_profundidade(self, problema)
         fim = time.time()
         print("Time:", fim - ini)
         return caminho #Retornar o caminho percorrido

@@ -18,7 +18,7 @@ class Local:
         #     n= randrange(0,7)
         #     matriz[n][c] = "'Q'"
         Nos = No()
-        Nos._init_(matriz,None, 0, 0) #No inicial
+        Nos._init_(matriz,None, Auxiliar.conflitos(self,matriz), 0) #No inicial
         while(True):
             Auxiliar.matrizprint(self,Nos.estado)
             if(problema.teste_objetivo(Nos,"local") == True ):
