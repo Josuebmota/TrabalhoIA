@@ -13,8 +13,9 @@ class Main:
         problema = Problema()
         problema._init_(Select.estado_inicial, Select.acao, Select.teste_objetivo, 1)
         #Selecionar o tipo de busca,
-        #Caso for busca com profundidade limitada, é preciso especificar o limite
-        caminho = Buscas.busca_em_profundidade(self, problema)
+        #Caso for busca com profundidade limitada, é preciso especificar o limite no parametro
+        #Buscas locais so podem ser usadas nas Rainhas
+        caminho = Buscas.Hill_Climbing(self, problema)
         fim = time.time()
         print("Time:", fim - ini)
         return caminho #Retornar o caminho percorrido

@@ -1,6 +1,4 @@
 ---
-
-
 ---
 
 <h1 id="trabalho-de-inteligência-artificial">Trabalho de Inteligência Artificial</h1>
