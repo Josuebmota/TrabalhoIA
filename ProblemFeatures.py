@@ -1,4 +1,5 @@
 import copy
+from random import*
 class Problema: #Caracteristicas do problema que será executado
     def _init_(self, estado_inicial, acoes, teste_objetivo, custo_do_passo):
         self.estado_inicial = estado_inicial
@@ -14,19 +15,14 @@ class No: #Caracteristicas da Posicao
         self.profundidade = profundidade
     
 class Auxiliar:#Ira auxiliar as buscas
+    #--------------------------Auxilia nas Buscas sem informação-----------------------------------
     def expande(self, no, problema, tipo): #Expandira o nó
         Conjfilhos = [] #Conjunto de Filhos
-        if(tipo == "cega"):
-            possibilidades = problema.acoes(no, tipo) #Possibilidades de filhos
-        else:
-            possibilidades, conflitos = problema.acoes(no, tipo) #Possibilidades de filhos
+        possibilidades = problema.acoes(no, tipo) #Possibilidades de filhos
         if(possibilidades !=[]):
             for acoes in range(len(possibilidades)): #Caminhos possiveis 
                 nofilho = No()
-                if(tipo == "cega"):
-                    nofilho._init_(possibilidades[acoes],no,no.custo + problema.custo_do_passo, no.profundidade + 1)
-                else:
-                    nofilho._init_(possibilidades[acoes],no,conflitos, no.profundidade + 1)
+                nofilho._init_(possibilidades[acoes],no,no.custo + problema.custo_do_passo, no.profundidade + 1)
                 Conjfilhos.append(nofilho) #Adicionando o filhos
         return Conjfilhos
 
@@ -85,7 +81,8 @@ class Auxiliar:#Ira auxiliar as buscas
                     cont+=1
                 c+=1
         return cont-6
-
+    
+    #--------------------------Auxilia nas Buscas Locais-----------------------------------
     def achaQ(self, matriz, col): #Funcao para achar a linha da rainha
         for linha in range(len(matriz)):
             if (matriz[linha][col]=="'Q'"):
@@ -127,3 +124,56 @@ class Auxiliar:#Ira auxiliar as buscas
                 if(matriz[i][j]==menor):
                     liMenor.append(matriz[i][j])
         return liMenor, menor
+
+    def gerarCusto(self,conflitos, matriz):
+        return conflitos[Auxiliar.achaQ(self,matriz,0)][0]
+
+    def vizinhos(self, matriz):
+        vizinhos =[]
+        for i in range(len(matriz)):
+            for j in  range(len(matriz)):
+                if(matriz[i][j]!="'Q'"):
+                    aux = copy.deepcopy(matriz)
+                    aux = Auxiliar.ColunaX(self,aux,j)
+                    aux[i][j]="'Q'"
+                    vizinhos.append(aux)
+        return vizinhos
+
+    Batidas = []
+    visitados = []
+
+    def expandelocal(self, no):
+        aux = copy.deepcopy(no.estado)
+        liMenor, menor = Auxiliar.melhorfilho(self,Auxiliar.Batidas)#Melhor filho
+        select = randrange(0,len(liMenor))#Selecionar um dos melhores filhos
+        contador = -1
+        for i in range(len(aux)):
+            for j in range(len(aux)):
+                if(menor == Auxiliar.Batidas[i][j]):#Procurar o melhor filho selecionado
+                    contador+=1 #Depende da quantiadade de melhores filhos
+                if(contador==select):#Achou
+                    linha = Auxiliar.achaQ(self,aux,j)#Pega linha em que a rainha está
+                    aux[linha][j] = "'x'" #Faz a troca
+                    aux[i][j] = "'Q'"
+                    Auxiliar.Batidas = Auxiliar.conflitos(self,aux)
+                    nofilho = No()
+                    nofilho._init_(aux,no,Auxiliar.gerarCusto(self, Auxiliar.Batidas, aux), no.profundidade + 1)
+                    return nofilho
+
+    def Peturbar(self, no):
+        vizinhos = Auxiliar.vizinhos(self,no.estado)
+        while(True):
+            select = randrange(0,len(vizinhos))
+            if(not vizinhos[select] in Auxiliar.visitados):
+                Auxiliar.visitados.append(vizinhos[select])
+                break
+        Proximo = No()
+        Proximo._init_(vizinhos[select],no,Auxiliar.gerarCusto(self, Auxiliar.conflitos(self,vizinhos[select]),vizinhos[select]),no.profundidade + 1)
+        return Proximo
+
+    def selectMask(self):
+        a = randrange(0,1)
+        if(a==0):
+            return [0,0,0,0,1,1,1,1]
+        else:
+            [1,1,0,0,0,0,1,1]
