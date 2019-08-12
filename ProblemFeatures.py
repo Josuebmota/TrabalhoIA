@@ -25,7 +25,15 @@ class Auxiliar:#Ira auxiliar as buscas
                 nofilho._init_(possibilidades[acoes],no,no.custo + problema.custo_do_passo, no.profundidade + 1)
                 Conjfilhos.append(nofilho) #Adicionando o filhos
         return Conjfilhos
-
+    
+    estado_inicial = [] # gerar matriz inicial
+    indice = 8
+    for l in range(indice):
+        linha = []
+        for c in range(indice):
+            linha.append("'x'")
+        estado_inicial.append(linha)
+    
     def matrizprint(self,matriz): #Printar a matriz
         for i in range(len(matriz)):
             for j in range(len(matriz)): 
@@ -172,8 +180,10 @@ class Auxiliar:#Ira auxiliar as buscas
         return Proximo
 
     def selectMask(self):
-        a = randrange(0,1)
+        a = randrange(0,2)
         if(a==0):
             return [0,0,0,0,1,1,1,1]
-        else:
-            [1,1,0,0,0,0,1,1]
+        if(a==1):
+            return [1,1,1,0,0,0,0,0]
+        if(a==2):
+            return [1,1,0,0,0,0,1,1]

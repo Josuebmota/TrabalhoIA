@@ -1,4 +1,4 @@
-from ProblemFeatures import Problema, No
+from ProblemFeatures import Problema, No, Auxiliar
 from Buscas.Cega import Cega
 from Buscas.Local import Local
 from Problemas.Puzzle8 import Puzzle8
@@ -17,12 +17,14 @@ class Main:
         #Caso for busca com profundidade limitada, é preciso especificar o limite no parametro
         #Buscas locais so podem ser usadas nas Rainhas
         # caminho = Cega.busca_em_profundidade(self, problema)
-        caminho = Local.Simulated_Annealing(self,5000,300,2,0.9)
+        print("Solucionando.....")
+        caminho = Local.Algoritmos_Genéticos(self,20,50,20,30)
         fim = time.time()
         print("Time:", fim - ini)
         return caminho #Retornar o caminho percorrido
 
 #Executar as tarefas
-
 Exe = Main()
-Exe.executar()
+A = Exe.executar()
+
+ 
