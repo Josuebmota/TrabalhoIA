@@ -18,7 +18,7 @@ class Main:
         #Buscas locais so podem ser usadas nas Rainhas
         # caminho = Cega.busca_em_profundidade(self, problema)
         print("Solucionando.....")
-        caminho = Local.Algoritmos_Genéticos(self,20,50,20,30)
+        caminho = Local.Algoritmos_Genéticos(self,100,10,80,10)
         fim = time.time()
         print("Time:", fim - ini)
         return caminho #Retornar o caminho percorrido

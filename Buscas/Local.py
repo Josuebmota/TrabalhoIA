@@ -1,5 +1,6 @@
 from ProblemFeatures import No, Auxiliar
-from random import*
+import random
+from random import randrange
 import copy
 import numpy
 from operator import attrgetter
@@ -68,14 +69,50 @@ class Local:
         print("Custo:", Nos.custo)
         return Nos
 
-    def Algoritmos_Genéticos(self, n, a,b,c):
+    def Algoritmos_Genéticos(self, n, eleicao,repro,mut):
         populacao = Local.GerarPopulucao(self, n)
         while(True):
+            novapopulacao = []
             if(Local.testeGenetico(self,populacao) == True):
                 break
-            Local.eleicao(self,populacao,n,a)
-            populacao = Local.reproducao(self,populacao,n,b,a)
-            populacao = Local.mutacao(self,populacao,n,c)
+
+            for i in range(int(((n*eleicao)/100))):
+                novapopulacao.append(copy.deepcopy(populacao[i]))
+
+            while(len(novapopulacao)<int(((n*(repro+eleicao))/100))):
+                random.shuffle(populacao)
+                a = Local.rodeio(self,populacao)
+                b = Local.rodeio(self,populacao)
+                while(a==b):
+                    b = Local.rodeio(self,populacao)
+                lista1 = copy.deepcopy(Auxiliar.estado_inicial)
+                lista2 = copy.deepcopy(Auxiliar.estado_inicial)
+                mask = randrange(0,6)
+                for col in range(len(lista1)):
+                    if(col<=mask):
+                        lista1[Auxiliar.achaQ(self,populacao[a].estado,col)][col] = "'Q'"
+                        lista2[Auxiliar.achaQ(self,populacao[b].estado,col)][col] = "'Q'"
+                    else:
+                        lista1[Auxiliar.achaQ(self,populacao[b].estado,col)][col] = "'Q'"
+                        lista2[Auxiliar.achaQ(self,populacao[a].estado,col)][col] = "'Q'"
+                f1 = Local.expande(self,lista1)
+                f2 = Local.expande(self,lista2)
+                novapopulacao.append(f1)
+                novapopulacao.append(f2)
+
+            for i in range(int(((n*mut)/100))):
+                random.shuffle(populacao)
+                p = Local.rodeio(self,populacao)
+                No = copy.deepcopy(populacao[p])
+                c = randrange(0,7)
+                linha = Auxiliar.achaQ(self, No.estado, c)
+                l = randrange(0,7)
+                No.estado[linha][c] = "'x'"
+                No.estado[l][c] = "'Q'"
+                No.custo = Auxiliar.gerarCusto(self,Auxiliar.conflitos(self,No.estado), No.estado)
+                novapopulacao.append(No)
+
+            populacao = copy.deepcopy(novapopulacao)
         return populacao
     
     def GerarPopulucao(self, n):
@@ -85,55 +122,17 @@ class Local:
             for col in range(8):
                 select = randrange(0,7)
                 matriz[select][col]="'Q'"
-            Auxiliar.Batidas = Auxiliar.conflitos(self,matriz)
-            Individuo = No()
-            Individuo._init_(matriz,None,Auxiliar.gerarCusto(self, Auxiliar.Batidas, matriz), None)
+            Individuo = Local.expande(self, matriz)
             populacao.append(Individuo)
         return populacao
 
     def testeGenetico(self, populacao):
         populacao.sort(key=attrgetter("custo"))
-        if(populacao[0].custo == 1):
+        if(populacao[0].custo == 0):
             Auxiliar.matrizprint(self,populacao[0].estado)
             print("Profundidade Total:", populacao[0].profundidade)
             print("Custo:", populacao[0].custo)
             return True
-
-    def eleicao(self, populacao,n, porc):
-        # while(len(lista)<int(((n*porc)/100))):
-        for i in range(int(((n*porc)/100))):
-        #     lista.append(copy.deepcopy(populacao[i]))
-            a =  randrange(0,len(populacao))
-            b =  randrange(0,len(populacao))
-            while(b==a):
-                b = randrange(0,len(populacao))
-            if(populacao[a].custo>=populacao[b].custo):
-                del(populacao[a])
-            else:
-                del(populacao[b])
-
-    def reproducao(self, populacao,n, porc, porc2):
-        lista = copy.deepcopy(populacao)
-        while(len(lista)<int(((n*porc)/100)+((n*porc2)/100))):
-            a = randrange(0,len(lista))
-            b = randrange(0,len(lista))
-            while(b==a):
-                b = randrange(0,len(lista))
-            lista1 = copy.deepcopy(Auxiliar.estado_inicial)
-            lista2 = copy.deepcopy(Auxiliar.estado_inicial)
-            mask = randrange(0,6)
-            for col in range(len(lista1)):
-                if(col<=mask):
-                    lista1[Auxiliar.achaQ(self,lista[a].estado,col)][col] = "'Q'"
-                    lista2[Auxiliar.achaQ(self,lista[b].estado,col)][col] = "'Q'"
-                else:
-                    lista1[Auxiliar.achaQ(self,lista[b].estado,col)][col] = "'Q'"
-                    lista2[Auxiliar.achaQ(self,lista[a].estado,col)][col] = "'Q'"
-            f1 = Local.expande(self,lista1)
-            f2 = Local.expande(self,lista2)
-            lista.append(f1)
-            lista.append(f2)
-        return lista
 
     def expande(self, lista):
         matriz = copy.deepcopy(lista)
@@ -141,16 +140,12 @@ class Local:
         nofilho._init_(matriz,None,Auxiliar.gerarCusto(self, Auxiliar.conflitos(self,matriz), matriz), None)
         return nofilho
 
-    def mutacao(self, populacao,n, porc):
-        lista = copy.deepcopy(populacao)
-        for i in range(0, int(((n*porc)/100))):
+    def rodeio(self, populacao):
+        lista=[]
+        for i in range(3):
             p = randrange(0,len(populacao))
-            No = copy.deepcopy(lista[p])
-            c = randrange(0,7)
-            linha = Auxiliar.achaQ(self, No.estado, c)
-            l = randrange(0,7)
-            No.estado[linha][c] = "'x'"
-            No.estado[l][c] = "'Q'"
-            No.custo = Auxiliar.gerarCusto(self,Auxiliar.conflitos(self,No.estado), No.estado)
-            lista.append(No)
-        return lista
+            lista.append(populacao[p])
+        lista.sort(key=attrgetter("custo"))
+        for i in range(len(populacao)):
+            if(lista[0].custo==populacao[i].custo):
+                return i
