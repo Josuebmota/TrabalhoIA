@@ -1,6 +1,3 @@
----
----
-
 <h1 id="trabalho-de-inteligência-artificial">Trabalho de Inteligência Artificial</h1>
 <h2 id="tipos-de-buscas">Tipos de buscas Cega</h2>
 <p>1 - Busca em profundidade<br>
