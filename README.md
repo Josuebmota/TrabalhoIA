@@ -2,10 +2,10 @@
 Práticas desenvolvidas na disciplina de programação orietada a objeto
 
 ### Problemas
-1. Problemas das oito rainhas
+1. Problemas das oito rainhas<br>
 Fazer com que o tabuleiro seja preenchido com 8 rainhas, sem que elas se ataquem.
 
-2. Problema do quebra cabeça de oito peças
+2. Problema do quebra cabeça de oito peças<br>
 Resolver o problema, não importanto a ordem em que ele esteja
 
 ### Tipos de buscas Cega
