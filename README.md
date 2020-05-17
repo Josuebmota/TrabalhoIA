@@ -1,21 +1,28 @@
-<h1 id="trabalho-de-inteligência-artificial">Trabalho de Inteligência Artificial</h1>
-<h2 id="tipos-de-buscas">Tipos de buscas Cega</h2>
-<p>1 - Busca em profundidade<br>
-2 - Busca em profundidade com lista de visitados<br>
-3 - Busca em profundidade limitada<br>
-4 - Busca com aprofundamento interativo<br>
-5 - Busca em largura<br>
-6 - Busca em custo uniforme</p>
+## Trabalho de Inteligência Artificial
+Práticas desenvolvidas na disciplina de programação orietada a objeto
 
-<h2 id="tipos-de-buscas">Tipos de buscas Local</h2>
-<p> 1- Hill_Climbing<br>
-2 - Simulated_Annealing(Ainda não foi finalizado)<br>
-3 - Algoritmos_Genéticos(Ainda não foi finalizado)<br>
-<br>
-obs:Busca Implementada somente para o problema das Oito Rainhas
-</p>
-<h2 id="problemas">Problemas</h2>
-<p>1 - Problemas das oito rainhas<br>
-2 - Problema do quebra cabeça de oito peças<br>
-3 - Mapa da Romenia(Ainda não foi finalizado)</p>
+### Problemas
+1. Problemas das oito rainhas
+Fazer com que o tabuleiro seja preenchido com 8 rainhas, sem que elas se ataquem.
 
+2. Problema do quebra cabeça de oito peças
+Resolver o problema, não importanto a ordem em que ele esteja
+
+### Tipos de buscas Cega
+
+1. Busca em profundidade
+2. Busca em profundidade com lista de visitados
+3. Busca em profundidade limitada
+4. Busca com aprofundamento interativo
+5. Busca em largura
+6. Busca em custo uniforme
+
+### Tipos de buscas Local
+
+1. Hill_Climbing
+2. Simulated_Annealing (Ainda não foi finalizado)
+3. Algoritmos_Genéticos (Ainda não foi finalizado)
+
+### [](<[https://github.com/Josuebmota/TrabalhoIA](https://github.com/Josuebmota/TrabalhoIA)#autor>)Autor
+
+- **Josué Batista Mota** - [GitHub](https://github.com/Josuebmota) - Email: [josuebatistam1@gmail.com](mailto:josuebatistam1@gmail.com)
