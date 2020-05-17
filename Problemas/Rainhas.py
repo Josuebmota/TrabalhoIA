@@ -1,4 +1,5 @@
-from ProblemFeatures import No, Auxiliar
+from Auxilares.ProblemFeature import No
+from Auxilares.FuncoesAuxliares import Auxiliar
 from random import randrange
 import copy
 

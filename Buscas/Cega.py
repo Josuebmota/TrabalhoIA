@@ -1,4 +1,5 @@
-from ProblemFeatures import No, Auxiliar
+from Auxilares.ProblemFeature import No
+from Auxilares.FuncoesAuxliares import Auxiliar
 import random
 from operator import attrgetter
 from random import randrange
