@@ -10,7 +10,7 @@
   <a href="https://github.com/Josuebmota/TrabalhoIA/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Josuebmota/TrabalhoIA?color=6158f3">
   </a> 
-  <a href="https://github.com/Josuebmota/SmallPDV/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-6158f3">
+  <a href="https://github.com/Josuebmota/TrabalhoIA/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-6158f3">
   </a>
   <a href="https://github.com/Josuebmota/TrabalhoIA/stargazers"><img alt="Stargazers" src="https://img.shields.io/github/stars/Josuebmota/TrabalhoIA?color=6158f3&logo=github">
   </a>
@@ -87,7 +87,7 @@ Simulated Annealing e Genéticos, podem apresentar alguns erros, pois estão inc
 ## 🐛 Problemas
 Sinta-se a vontade de registrar um novo problema, com um respectivo título e descrição no repositório do [TrabalhoIA](https://github.com/Josuebmota/TrabalhoIA/issues). Se encontrar a solução, avaliarei seu Pull Request.
 
-## 👨‍💻 [](<[https://github.com/Josuebmota/TrabalhoIA](https://github.com/Josuebmota/TrabalhoIA)#autor>)Autores
+## 👨‍💻 [](<[https://github.com/Josuebmota/TrabalhoIA](https://github.com/Josuebmota/TrabalhoIA)#autor>)Autor
 
 Criado por [**Josué Batista Mota** ](https://github.com/Josuebmota), <br>esse projeto está sobre [MIT license](./LICENSE) 📃.
 
