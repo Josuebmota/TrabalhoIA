@@ -22,7 +22,7 @@
 - [Vs Code](https://code.visualstudio.com/)
 - [Python](https://www.python.org/)
 
-## 🚨 Problemas
+## 🚨 Questões
 ### ♟️ Oito rainhas 
 <p align="justify"> O objetivo deste problema é fazer com que o algoritmo posicione oito rainhas em um tabuleiro de xadrez, sem que nenhuma delas ataque as outras. A imagem abaixo mostra os possiveis ataques de uma rainha.</p>
 <p align="center">
